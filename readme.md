@@ -41,4 +41,3 @@ An object with the following properties:
 ## License
 
 This project is licensed under the terms of the MIT license.
-# react-pages-fitter
