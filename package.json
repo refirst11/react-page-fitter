@@ -1,6 +1,6 @@
 {
   "name": "react-pages-fitter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automatically adjust page size to fit the display using a React hook",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
