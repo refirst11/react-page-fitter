@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/su-pull/react-page-fitter",
-    "directory": "react-pages-fitter/src"
+    "directory": "react-page-fitter/src"
   },
   "scripts": {
     "tsc": "./node_modules/.bin/tsc"

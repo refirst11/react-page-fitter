@@ -1,4 +1,4 @@
-# react-pages-fitter
+# react-page-fitter
 
 This is a React hook that checking if an HTML element fits within the current viewport.
 
@@ -11,14 +11,20 @@ npm install react-page-fitter
 ## Usage
 
 ```tsx
-import { useRef } from 'react';
-import useFitter from 'react-page-fitter';
+import { useRef } from 'react'
+import useFitter from 'react-page-fitter'
 
 function MyComponent() {
-  const pageRef = useRef(null);
-  const { isFitted } = useFitter(pageRef, { offsetY: 100 });
+  const pageRef = useRef(null)
+  const { isFitted } = useFitter(pageRef, { offsetY: 100 })
 
-  return <div ref={pageRef}>{isFitted ? 'The page fits within the viewport.' : 'The page overflows the viewport.'}</div>;
+  return (
+    <div ref={pageRef}>
+      {isFitted
+        ? 'The page fits within the viewport.'
+        : 'The page overflows the viewport.'}
+    </div>
+  )
 }
 ```
 
