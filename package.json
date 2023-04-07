@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/su-pull/react-pages-fitter",
+    "url": "https://github.com/su-pull/react-page-fitter",
     "directory": "react-pages-fitter/src"
   },
   "scripts": {

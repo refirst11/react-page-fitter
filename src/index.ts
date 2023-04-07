@@ -1,36 +1,43 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, RefObject } from 'react'
 
 export interface FitterOptions {
-  offsetY?: number;
-  offsetX?: number;
+  offsetY?: number
+  offsetX?: number
 }
 
 export interface UseFitterResult {
-  isFitted: boolean;
+  isFitted: boolean
 }
 
-const useFitter = (ref: RefObject<HTMLElement>, { offsetY = 0, offsetX = 0 }: Partial<FitterOptions> = {}): UseFitterResult => {
-  const [isFitted, setIsFitted] = useState(true);
+const useFitter = (
+  ref: RefObject<HTMLElement>,
+  { offsetY = 0, offsetX = 0 }: Partial<FitterOptions> = {}
+): UseFitterResult => {
+  const [isFitted, setIsFitted] = useState(true)
 
   useEffect(() => {
     // Create ResizeObserver and watch for changes to the element's dimensions
-    const observer = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new ResizeObserver(entries => {
+      entries.forEach(entry => {
         // Check if element fits within the viewport
-        const windowHeight = window.innerHeight - offsetY;
-        const windowWidth = window.innerWidth - offsetX;
-        setIsFitted(entry.target.clientHeight < window.innerHeight && entry.target.clientHeight < windowHeight && entry.target.clientWidth < windowWidth);
-      });
-    });
+        const windowHeight = window.innerHeight - offsetY
+        const windowWidth = window.innerWidth - offsetX
+        setIsFitted(
+          entry.target.clientHeight < window.innerHeight &&
+            entry.target.clientHeight < windowHeight &&
+            entry.target.clientWidth < windowWidth
+        )
+      })
+    })
 
     // Start observing the element's dimensions
-    if (ref.current) observer.observe(ref.current);
+    if (ref.current) observer.observe(ref.current)
 
     // Clean up the observer when the component unmounts
-    return () => observer.disconnect();
-  }, [ref, setIsFitted]);
+    return () => observer.disconnect()
+  }, [ref, setIsFitted])
 
-  return { isFitted };
-};
+  return { isFitted }
+}
 
-export default useFitter;
+export default useFitter

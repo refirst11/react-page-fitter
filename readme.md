@@ -5,14 +5,14 @@ This is a React hook that checking if an HTML element fits within the current vi
 ## Installation
 
 ```sh
-npm install react-pages-fitter
+npm install react-page-fitter
 ```
 
 ## Usage
 
 ```tsx
 import { useRef } from 'react';
-import useFitter from 'react-pages-fitter';
+import useFitter from 'react-page-fitter';
 
 function MyComponent() {
   const pageRef = useRef(null);
