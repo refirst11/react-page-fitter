@@ -30,6 +30,7 @@ Parameters:
 
 - ref (required): A RefObject that points to the HTML element to be checked.
 - options (optional): An object with the following optional properties:
+
   - offsetY: A number representing the vertical offset from the top of the viewport to use when checking if the element fits. Defaults to 0.
   - offsetX: A number representing the horizontal offset from the left of the viewport to use when checking if the element fits. Defaults to 0.
 
