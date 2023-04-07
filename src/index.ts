@@ -1,4 +1,4 @@
-import { useState, useInsertionEffect, RefObject } from 'react';
+import { useState, useEffect, RefObject } from 'react';
 
 export interface FitterOptions {
   offsetY?: number;
@@ -12,7 +12,7 @@ export interface UseFitterResult {
 const useFitter = (ref: RefObject<HTMLElement>, { offsetY = 0, offsetX = 0 }: Partial<FitterOptions> = {}): UseFitterResult => {
   const [isFitted, setIsFitted] = useState(true);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     // Create ResizeObserver and watch for changes to the element's dimensions
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
