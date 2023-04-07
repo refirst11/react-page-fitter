@@ -1,0 +1,32 @@
+{
+  "name": "react-pages-fitter",
+  "version": "1.0.0",
+  "description": "Automatically adjust page size to fit the display using a React hook",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/su-pull/react-pages-fitter",
+    "directory": "react-pages-fitter/src"
+  },
+  "scripts": {
+    "tsc": "./node_modules/.bin/tsc"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "responsive",
+    "viewport",
+    "fitting",
+    "layout"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33"
+  }
+}
