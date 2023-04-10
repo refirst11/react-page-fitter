@@ -23,8 +23,7 @@ const useFitter = (
         const windowHeight = window.innerHeight - offsetY
         const windowWidth = window.innerWidth - offsetX
         setIsFitted(
-          entry.target.clientHeight < window.innerHeight &&
-            entry.target.clientHeight < windowHeight &&
+          entry.target.clientHeight < windowHeight &&
             entry.target.clientWidth < windowWidth
         )
       })
