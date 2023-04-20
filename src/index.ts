@@ -1,4 +1,5 @@
 import { useState, useEffect, RefObject } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export interface FitterOptions {
   offsetY?: number
@@ -14,6 +15,7 @@ const useFitter = (
   { offsetY = 0, offsetX = 0 }: Partial<FitterOptions> = {}
 ): UseFitterResult => {
   const [isFitted, setIsFitted] = useState(true)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     // Create ResizeObserver and watch for changes to the element's dimensions
@@ -34,7 +36,7 @@ const useFitter = (
 
     // Clean up the observer when the component unmounts
     return () => observer.disconnect()
-  }, [offsetX, offsetY, ref, setIsFitted, isFitted])
+  }, [offsetX, offsetY, ref, setIsFitted, isFitted, pathname])
 
   return { isFitted }
 }
