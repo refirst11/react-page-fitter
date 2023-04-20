@@ -34,7 +34,7 @@ const useFitter = (
 
     // Clean up the observer when the component unmounts
     return () => observer.disconnect()
-  }, [ref, setIsFitted])
+  }, [offsetX, offsetY, ref, setIsFitted, isFitted])
 
   return { isFitted }
 }
