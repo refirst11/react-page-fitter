@@ -41,15 +41,11 @@ useFitter({ref, options})
   If not set, observe the imported component.
 - options (optional): viewport property values.
 
-  1\. offsetX: A number representing the horizontal offset to use if the element fits. The default value is 0.
+  1\. offsetX: A number representing the horizontal offset to use if the element fits.  
+  The default value is 0.
 
-  2\. offsetY: A number representing the vertical offset to use if the element fits. The default value is 0.
-
-## Tested
-
-Next.js 13.2.4 Stable Pages Route  
-Next.js 13.3.0 Beta App Route  
-Remix 1.15.0 v2_routeConvention
+  2\. offsetY: A number representing the vertical offset to use if the element fits.  
+  The default value is 0.
 
 ## License
 
