@@ -1,10 +1,10 @@
 # react-page-fitter
 
 [![Release Status](https://img.shields.io/github/release/su-pull/react-page-fitter.svg)](https://github.com/su-pull/react-page-fitter/releases/latest)
+![code size](https://img.shields.io/github/languages/code-size/su-pull/react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-
-This is a React hook that checking if an HTML element fits within the current viewport.
+This is a React hook that observe HTML element fits within the current viewport.
 
 ## Installation
 
@@ -16,39 +16,41 @@ npm install react-page-fitter
 
 ```tsx
 import { useRef } from 'react'
-import useFitter from 'react-page-fitter'
+import useFitter, { Main } from 'react-page-fitter'
 
 function MyComponent() {
-  const pageRef = useRef(null)
-  const { isFitted } = useFitter(pageRef, { offsetY: 100 })
+  const ref = useRef(null)
+  const isFit = useFitter({ offsetY: 100, optional: ref })
 
   return (
-    <div ref={pageRef}>
-      {isFitted
-        ? 'The page fits within the viewport.'
-        : 'The page overflows the viewport.'}
-    </div>
+    <Main classFitIn={style} classFitOut={style}>
+      <div style={{isFit ? style : style}}> </div>
+      {children}
+    </Main>
   )
 }
 ```
 
 ## API
 
-useFitter(ref, options)
+useFitter({ref, options})
 
-Parameters:
+## Parameters
 
-- ref (required): A RefObject that points to the HTML element to be checked.
-- options (optional): An object with the following optional properties:
+- ref (optional): RefObject to the HTML element to be observe.  
+  If not set, observe the imported component.
+- options (optional): viewport property values.
 
-  - offsetY: A number representing the vertical offset from the top of the viewport to use when checking if the element fits. Defaults to 0.
-  - offsetX: A number representing the horizontal offset from the left of the viewport to use when checking if the element fits. Defaults to 0.
+  1\. offsetX: A number representing the horizontal offset to use if the element fits. The default value is 0.
 
-Returns:
-An object with the following properties:
+  2\. offsetY: A number representing the vertical offset to use if the element fits. The default value is 0.
 
-- isFitted: A boolean indicating whether the element fits within the viewport.
+## Tested
+
+Next.js 13.2.4 Stable Pages Route  
+Next.js 13.3.0 Beta App Route  
+Remix 1.15.0 v2_routeConvention
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+The MIT License.
