@@ -21,7 +21,7 @@ import useFitter, { Main } from 'react-page-fitter'
 function MyComponent({children}: { children: React.ReactNode }) {
   const ref = useRef(null)
   const { pathname } = useLocation()
-  const isFit = useFitter({ offsetY: 100, optional: ref, location: pathname })
+  const isFit = useFitter({ offsetY: 100, optional: ref })
 
   return (
     <>
