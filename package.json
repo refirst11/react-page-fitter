@@ -1,6 +1,6 @@
 {
   "name": "react-page-fitter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Automatically observe and adjust element size to fit the display",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -24,7 +24,6 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0",
     "typescript": "^5.0.3"
   },
   "devDependencies": {
