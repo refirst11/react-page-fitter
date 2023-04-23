@@ -45,7 +45,7 @@ useFitter({ref, location, options})
 - ref (optional): RefObject to the HTML element to be observe.  
   If not set, observe the imported component.
 
-- location (require): Set a current dynamic pathname to the location.
+- location (require): Set a current dynamic pathname to the location.  
   This is the function execution trigger.
 
 - options (optional): viewport property values.
