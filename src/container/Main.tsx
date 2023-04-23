@@ -18,9 +18,9 @@ export const Main = ({
   const ref = useRef<HTMLElement>(null)
   const isFit = useFitter({ optional: ref })
   const fit = isFit ? classFitIn : classFitOut
-  const classed = className + ' ' + fit
+  const classes = className + ' ' + fit
   return (
-    <main ref={ref} className={classed}>
+    <main ref={ref} className={classes}>
       {children}
     </main>
   )
