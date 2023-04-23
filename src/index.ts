@@ -5,18 +5,26 @@ export type Option = {
   offsetX?: number
   offsetY?: number
   optional?: RefObject<HTMLElement>
-  location: string
 }
 
 const useFitter = ({
   offsetX = 0,
   offsetY = 0,
-  optional: ref,
-  location: pathname
+  optional: ref
 }: Partial<Option> = {}) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
 
-  // Callback function a this file's core.
+  // client safe path and effect
+  const isClient = typeof window !== 'undefined'
+  const pathname = isClient && window.location.pathname
+  const canUseDOM = !!(
+    isClient &&
+    window.document &&
+    window.document.createElement
+  )
+  const useSafeLayoutEffect = canUseDOM ? useLayoutEffect : () => {}
+
+  // callback function a this file's core.
   const updateStatus = useCallback(() => {
     const winWidth = window.innerWidth - offsetX
     const winHeight = window.innerHeight - offsetY
@@ -25,13 +33,13 @@ const useFitter = ({
     setIsFit(height < winHeight && width < winWidth)
   }, [offsetX, offsetY, ref])
 
-  // Page transition function.
-  useLayoutEffect(() => {
+  // page transition function.
+  useSafeLayoutEffect(() => {
     return updateStatus()
   }, [pathname, updateStatus])
 
-  // Realtime resize event watcher function.
-  useLayoutEffect(() => {
+  // realtime resize event watcher function.
+  useSafeLayoutEffect(() => {
     // create constructor watch's realtime event.
     const observer = new ResizeObserver(updateStatus)
     // start observing the element.
