@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import useFitter from '..'
 import type { ReactNode } from 'react'
+import useFitter from '..'
 
 type MainProps = {
   children: ReactNode
