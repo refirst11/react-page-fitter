@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom'
 import { useCallback, useLayoutEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
@@ -6,15 +5,16 @@ export type Option = {
   offsetX?: number
   offsetY?: number
   optional?: RefObject<HTMLElement>
+  location: string
 }
 
 const useFitter = ({
   offsetX = 0,
   offsetY = 0,
-  optional: ref
+  optional: ref,
+  location: pathname
 }: Partial<Option> = {}) => {
-  const { pathname } = useLocation()
-  const [isFit, setIsFit] = useState(true)
+  const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
 
   // Callback function a this file's core.
   const updateStatus = useCallback(() => {
@@ -34,7 +34,7 @@ const useFitter = ({
   useLayoutEffect(() => {
     // create constructor watch's realtime event.
     const observer = new ResizeObserver(updateStatus)
-    // start ovserving the element.
+    // start observing the element.
     if (ref?.current) {
       observer.observe(ref.current)
     }
