@@ -16,9 +16,9 @@ export const Main = ({
   classFitOut
 }: MainProps) => {
   const ref = useRef<HTMLElement>(null)
-  const isFit = useFitter({ optional: ref })
-  const fit = isFit ? classFitIn : classFitOut
-  const classes = className + ' ' + fit
+  const isFit = useFitter({ refElement: ref })
+  const classToApply = isFit ? classFitIn : classFitOut
+  const classes = className + ' ' + classToApply
   return (
     <main ref={ref} className={classes}>
       {children}
