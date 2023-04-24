@@ -4,13 +4,13 @@ import type { RefObject } from 'react'
 export type Option = {
   offsetX?: number
   offsetY?: number
-  optional?: RefObject<HTMLElement>
+  refElement?: RefObject<HTMLElement>
 }
 
 const useFitter = ({
   offsetX = 0,
   offsetY = 0,
-  optional: ref
+  refElement: ref
 }: Partial<Option> = {}) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
 
