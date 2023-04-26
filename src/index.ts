@@ -4,25 +4,21 @@ import type { RefObject } from 'react'
 export type Option = {
   offsetX?: number
   offsetY?: number
-  refElement?: RefObject<HTMLElement>
 }
 
-const useFitter = ({
-  offsetX = 0,
-  offsetY = 0,
-  refElement: ref
-}: Partial<Option> = {}) => {
+const useFitter = (
+  ref?: RefObject<HTMLElement>,
+  location?: string,
+  { offsetX = 0, offsetY = 0 }: Option = {}
+) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
-
-  // client safe path and effect
-  const isClient = typeof window !== 'undefined'
-  const pathname = isClient && window.location.pathname
+  // client safe effect
   const canUseDOM = !!(
-    isClient &&
+    typeof window !== 'undefined' &&
     window.document &&
     window.document.createElement
   )
-  const useSafeLayoutEffect = canUseDOM ? useLayoutEffect : () => {}
+  const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
   // callback function a this file's core.
   const updateStatus = useCallback(() => {
@@ -34,12 +30,12 @@ const useFitter = ({
   }, [offsetX, offsetY, ref])
 
   // page transition function.
-  useSafeLayoutEffect(() => {
+  useClientEffect(() => {
     return updateStatus()
-  }, [pathname, updateStatus])
+  }, [location, updateStatus])
 
   // realtime resize event watcher function.
-  useSafeLayoutEffect(() => {
+  useClientEffect(() => {
     // create constructor watch's realtime event.
     const observer = new ResizeObserver(updateStatus)
     // start observing the element.
@@ -53,7 +49,6 @@ const useFitter = ({
   }, [ref, updateStatus])
   return isFit
 }
-
 export default useFitter
 import { Main } from './container/Main'
 export { Main }
