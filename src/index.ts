@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
-export type Option = {
+type Option = {
   offsetX?: number
   offsetY?: number
 }

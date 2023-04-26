@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import type { ReactNode } from 'react'
 import useFitter from '..'
 
-type MainProps = {
+type FitPage = {
   children: ReactNode
   classFitIn: string
   classFitOut: string
@@ -16,7 +16,7 @@ export const Main = ({
   classFitOut,
   className,
   location
-}: MainProps) => {
+}: FitPage) => {
   const ref = useRef<HTMLElement>(null)
   const isFit = useFitter(ref, location)
   const classToApply = isFit ? classFitIn : classFitOut
