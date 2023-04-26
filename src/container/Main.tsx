@@ -4,19 +4,21 @@ import useFitter from '..'
 
 type MainProps = {
   children: ReactNode
-  className?: string
   classFitIn: string
   classFitOut: string
+  className?: string
+  location: string
 }
 
 export const Main = ({
   children,
-  className,
   classFitIn,
-  classFitOut
+  classFitOut,
+  className,
+  location
 }: MainProps) => {
   const ref = useRef<HTMLElement>(null)
-  const isFit = useFitter({ refElement: ref })
+  const isFit = useFitter(ref, location)
   const classToApply = isFit ? classFitIn : classFitOut
   const classes = className + ' ' + classToApply
   return (
