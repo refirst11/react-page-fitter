@@ -4,7 +4,7 @@
 ![code size](https://img.shields.io/github/languages/code-size/su-pull/react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a React hook that observe HTML element fits within the current viewport.
+This is a React hooks that observe HTML element fits within the current viewport.
 
 ## Installation
 
