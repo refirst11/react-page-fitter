@@ -1,7 +1,7 @@
 {
   "name": "react-page-fitter",
-  "version": "1.1.6",
-  "description": "Automatically observe and adjust element size to fit the display",
+  "version": "1.1.7",
+  "description": "hooks to help with css, automatically observe and adjust element size to fit the display",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -17,8 +17,7 @@
     "hooks",
     "responsive",
     "viewport",
-    "fitting",
-    "layout"
+    "fitting"
   ],
   "license": "MIT",
   "dependencies": {
