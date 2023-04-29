@@ -6,12 +6,14 @@ type Option = {
   offsetY?: number
 }
 
+type State = boolean | undefined
+
 const useFitter = (
   ref?: RefObject<HTMLElement>,
   location?: string,
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
-  const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
+  const [isFit, setIsFit] = useState<State>(undefined)
   // client safe effect
   const canUseDOM = !!(
     typeof window !== 'undefined' &&
@@ -26,7 +28,7 @@ const useFitter = (
     const winHeight = window.innerHeight - offsetY
     const height = ref?.current?.clientHeight as number
     const width = ref?.current?.clientWidth as number
-    setIsFit(height < winHeight && width < winWidth)
+    setIsFit(height <= winHeight && width <= winWidth)
   }, [offsetX, offsetY, ref])
 
   // page transition function.
@@ -39,14 +41,11 @@ const useFitter = (
     // create constructor watch's realtime event.
     const observer = new ResizeObserver(updateStatus)
     // start observing the element.
-    if (ref?.current) {
-      observer.observe(ref.current)
-    }
+    if (ref?.current) observer.observe(ref.current)
     // clean up the observer when the ref component unmount.
-    return () => {
-      observer.disconnect()
-    }
+    return () => observer.disconnect()
   }, [ref, updateStatus])
+
   return isFit
 }
 export default useFitter
