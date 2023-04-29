@@ -19,8 +19,8 @@ export const Main = ({
 }: FitPage) => {
   const ref = useRef<HTMLElement>(null)
   const isFit = useFitter(ref, location)
-  const classToApply = isFit ? classFitIn : classFitOut
-  const classes = className + ' ' + classToApply
+  const classFit = isFit ? classFitIn : classFitOut
+  const classes = className + ' ' + classFit
   return (
     <main ref={ref} className={classes}>
       {children}
