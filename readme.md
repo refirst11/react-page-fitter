@@ -18,7 +18,7 @@ npm install react-page-fitter
 import useFitter, { Main } from 'react-page-fitter'
 
 function MyComponent({ children }) {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const isFit = useFitter()
 
   return (
@@ -35,35 +35,24 @@ function MyComponent({ children }) {
 
 ## API
 
-useFitter (ref, pathname, {options})
+useFitter (ref, pathname, {options})  
+return value is boolean or undefined.
 
-## Arguments
+## Parameters
 
 - ref (optional): RefObject to the HTML element to be observe.  
-  If not set, it will observe the Main component.
+  If not set, it will observe the imported component.
 
-- pathname (optional): Set a dynamically changing pathname variable.  
-  If use the Main component, set it to location in Main's property.
+- pathname (optional): Set a current dynamic pathname.  
+  This is the function trigger.
 
-- {options} (optional): viewport property values.
+- options (optional): viewport property values.
 
   1\. offsetX: A number representing the horizontal offset to use if the element fits.  
   The default value is 0.
 
   2\. offsetY: A number representing the vertical offset to use if the element fits.  
   The default value is 0.
-
-## Return value
-
-The useFitter() is return a boolean value based on whether the element being watched fit.  
-Return undefined if the computation has not completed.
-
-## Main Properties
-
-- location(require)
-- classFitIn: Applies if element fit is true.
-- classFitOut: Applies if element fit is false.
-- className: optional.
 
 ## License
 
