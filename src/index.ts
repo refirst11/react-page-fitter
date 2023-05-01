@@ -14,7 +14,7 @@ const useFitter = (
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
   const [isFit, setIsFit] = useState<State>(undefined)
-  // client safe effect
+  // Client safe effect.
   const canUseDOM = !!(
     typeof window !== 'undefined' &&
     window.document &&
@@ -22,7 +22,7 @@ const useFitter = (
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
-  // callback function a this file's core.
+  // Callback function a this file's core.
   const updateStatus = useCallback(() => {
     const winWidth = window.innerWidth - offsetX
     const winHeight = window.innerHeight - offsetY
@@ -31,20 +31,26 @@ const useFitter = (
     setIsFit(height <= winHeight && width <= winWidth)
   }, [offsetX, offsetY, ref])
 
-  // page transition function.
-  useClientEffect(() => {
-    return updateStatus()
-  }, [location, updateStatus])
+  // Page location updated and trigger the ref, the useCallback is reevaluated.
+  useClientEffect(updateStatus, [location])
 
-  // realtime resize event watcher function.
+  // Window resize effect.
   useClientEffect(() => {
-    // create constructor watch's realtime event.
-    const observer = new ResizeObserver(updateStatus)
-    // start observing the element.
-    if (ref?.current) observer.observe(ref.current)
-    // clean up the observer when the ref component unmount.
+    // entry resize listener
+    window.addEventListener('resize', updateStatus)
+    // clean up the remove listener the component unmount
+    return () => window.removeEventListener('resize', updateStatus)
+  }, [updateStatus])
+
+  // Realtime content resize event watcher effect.
+  useClientEffect(() => {
+    // create MutationObserver constructor watch's realtime event
+    const observer = new MutationObserver(updateStatus)
+    // start observing the element and child element
+    if (ref?.current) observer.observe(ref.current, { childList: true })
+    // clean up the observer when the ref component unmount
     return () => observer.disconnect()
-  }, [ref, updateStatus])
+  }, [updateStatus])
 
   return isFit
 }
