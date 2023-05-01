@@ -47,7 +47,8 @@ const useFitter = (
     // create MutationObserver constructor watch's realtime event
     const observer = new MutationObserver(updateStatus)
     // start observing the element and child element
-    if (ref?.current) observer.observe(ref.current, { childList: true })
+    if (ref?.current)
+      observer.observe(ref.current, { childList: true, subtree: true })
     // clean up the observer when the ref component unmount
     return () => observer.disconnect()
   }, [updateStatus])
