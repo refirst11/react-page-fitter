@@ -1,6 +1,6 @@
 {
   "name": "react-page-fitter",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "hooks to help with css, automatically observe and adjust element size to fit the display",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -9,6 +9,7 @@
     "url": "https://github.com/su-pull/react-page-fitter",
     "directory": "react-page-fitter/src"
   },
+  "homepage": "https://works.su-pull.net/react-page-fitter",
   "scripts": {
     "tsc": "./node_modules/.bin/tsc"
   },
