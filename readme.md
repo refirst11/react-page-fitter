@@ -19,12 +19,12 @@ npm install react-page-fitter
 import useFitter, { Main } from 'react-page-fitter'
 
 function MyComponent({ children }) {
+  const { isRendering } = useFitter()
   const { pathname } = useLocation()
-  const isFit = useFitter()
 
   return (
     <>
-      {isFit !== undefined && (
+      {isRendering !== undefined && (
         <Main location={pathname} classFitIn={style} classFitOut={style}>
           {children}
         </Main>
@@ -37,7 +37,7 @@ function MyComponent({ children }) {
 ## API
 
 useFitter (ref, pathname, {options})  
-return value is boolean or undefined.
+return value is { isFit, isRendering }
 
 ## Parameters
 
