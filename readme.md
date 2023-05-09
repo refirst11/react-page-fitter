@@ -1,8 +1,8 @@
 # react-page-fitter
 
 [![Release Status](https://img.shields.io/github/release/su-pull/react-page-fitter.svg)](https://github.com/su-pull/react-page-fitter/releases/latest)
-![code size](https://img.shields.io/github/languages/code-size/su-pull/react-page-fitter)
-![downloads](https://img.shields.io/npm/dt/react-page-fitter?color=blue)
+[![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
+[![downloads](https://img.shields.io/npm/dt/react-page-fitter?color=blue)](https://npm-stat.com/charts.html?package=react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 This is a React hook that observe HTML element fits within the current viewport.
