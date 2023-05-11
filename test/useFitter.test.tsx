@@ -3,14 +3,9 @@ import React from 'react'
 import { renderHook, render, screen } from '@testing-library/react'
 
 describe('useFitter', () => {
-  test('should start with an undefined value', () => {
+  test('if ref is not set a value is null', () => {
     const { result } = renderHook(() => useFitter())
-    expect(result.current.isFit).toBeUndefined()
-  })
-
-  test('should start with a null value after initial rendering', () => {
-    const { result } = renderHook(() => useFitter())
-    expect(result.current.isRendering).toBeNull()
+    expect(result.current).toBeNull()
   })
 
   const refObject = React.createRef<HTMLDivElement>()
@@ -27,7 +22,7 @@ describe('useFitter', () => {
     const { result } = renderHook(() =>
       useFitter(refObject, undefined, { offsetX: -1, offsetY: -1 })
     )
-    expect(result.current.isFit).toBe(true)
+    expect(result.current).toBe(true)
   })
 
   test('should return false when the ref object width is greater than 999', () => {
@@ -39,6 +34,6 @@ describe('useFitter', () => {
     const { result } = renderHook(() =>
       useFitter(refObject, undefined, { offsetX: 1001, offsetY: 1001 })
     )
-    expect(result.current.isFit).toBe(false)
+    expect(result.current).toBe(false)
   })
 })
