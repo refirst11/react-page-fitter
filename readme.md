@@ -1,8 +1,8 @@
 # react-page-fitter
 
 [![Release Status](https://img.shields.io/github/release/su-pull/react-page-fitter.svg)](https://github.com/su-pull/react-page-fitter/releases/latest)
-![code size](https://img.shields.io/github/languages/code-size/su-pull/react-page-fitter)
-![downloads](https://img.shields.io/npm/dt/react-page-fitter?color=blue)
+[![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
+[![downloads](https://img.shields.io/npm/dt/react-page-fitter?color=blue)](https://npm-stat.com/charts.html?package=react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 This is a React hook that observe HTML element fits within the current viewport.
@@ -19,17 +19,19 @@ npm install react-page-fitter
 import useFitter, { Main } from 'react-page-fitter'
 
 function MyComponent({ children }) {
-  const { isRendering } = useFitter()
+  const isFit = useFitter()
   const { pathname } = useLocation()
 
+  if (isFit === undefined) return <Spinner />
+
   return (
-    <>
-      {isRendering !== undefined && (
-        <Main location={pathname} classFitIn={style} classFitOut={style}>
-          {children}
-        </Main>
-      )}
-    </>
+    <Main
+      location={pathname}
+      classFitIn={styles.fit_in}
+      classFitOut={styles.fit_out}
+    >
+      {children}
+    </Main>
   )
 }
 ```
@@ -37,14 +39,14 @@ function MyComponent({ children }) {
 ## API
 
 useFitter (ref, pathname, {options})  
-return value is { isFit, isRendering }
+return value boolean | null.
 
 ## Parameters
 
 - ref (optional): RefObject to the HTML element to be observe.  
-  If not set, it will observe the imported component.
+  if not set ref a value is null.
 
-- pathname (optional): Set a current dynamic pathname.  
+- pathname (recommended): Set a current dynamic pathname.  
   This is the function trigger.
 
 - options (optional): viewport property values.
