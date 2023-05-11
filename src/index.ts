@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
 type Option = {
@@ -6,21 +6,15 @@ type Option = {
   offsetY?: number
 }
 
-type Render = undefined | null
-type Calculate = undefined | boolean
+type State = boolean | null | undefined
 
 const useFitter = (
   ref?: RefObject<HTMLElement>,
   location?: string,
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
-  const [isRendering, setIsRendering] = useState<Render>(undefined)
-  //  Start with an undefined value.
-  useEffect(() => {
-    return setIsRendering(null)
-  }, [])
+  const [isFit, setIsFit] = useState<State>(undefined)
 
-  const [isFit, setIsFit] = useState<Calculate>(undefined)
   // Client safe effect.
   const canUseDOM = !!(
     typeof window !== 'undefined' &&
@@ -29,8 +23,11 @@ const useFitter = (
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
-  // Callback function a this file's core.
+  // This the core callback function.
   const updateStatus = useCallback(() => {
+    // skip effect, if ref is undefined
+    if (ref === undefined) return setIsFit(null)
+    // window and content size calculation
     const winWidth = window.innerWidth - offsetX
     const winHeight = window.innerHeight - offsetY
     const height = ref?.current?.clientHeight as number
@@ -38,33 +35,29 @@ const useFitter = (
     setIsFit(height <= winHeight && width <= winWidth)
   }, [offsetX, offsetY, ref])
 
-  // Watches for changes the element size and window size, update the accordingly.
-  // Trigger an initial update when the effect is first run.
+  // Watches for changes the element size and window size.
   useClientEffect(() => {
-    // skip effect if ref is undefined
-    if (ref === undefined) return
-
     // call updateStatus to set initial state
     updateStatus()
 
     // entry window resize listener
+    // create constructor and watch's start ovserve
     window.addEventListener('resize', updateStatus)
-
-    // create MutationObserver constructor watch's realtime element size change event
     const observer = new MutationObserver(updateStatus)
-
-    // start observing the element and child element
     if (ref?.current)
-      observer.observe(ref.current, { childList: true, subtree: true })
+      observer.observe(ref.current, {
+        childList: true,
+        subtree: true
+      })
 
-    // clean up the listener and observer when the ref component unmount
+    // Clean up listener and observer on ref component unmount.
     return () => {
       window.removeEventListener('resize', updateStatus)
       observer.disconnect()
     }
   }, [updateStatus, location])
 
-  return { isFit, isRendering }
+  return isFit
 }
 export default useFitter
 import { Main } from './container/Main'
