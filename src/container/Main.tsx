@@ -18,7 +18,7 @@ export const Main = ({
   location
 }: FitPage) => {
   const ref = useRef<HTMLElement>(null)
-  const { isFit } = useFitter(ref, location)
+  const isFit = useFitter(ref, location)
   const classFit = isFit ? classFitIn : classFitOut
   const classes = className + ' ' + classFit
   return (
