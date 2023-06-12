@@ -19,22 +19,24 @@ import useFitter from 'react-page-fitter'
 
 function MyComponent() {
   const { pathname } = useLocation()
-  const isFit = useFitter('main', pathname)
+  const isFit = useFitter('.container', pathname)
+
   if (isFit) return null
+
   return <ScrollTop />
 }
 ```
 
 ## API
 
-useFitter (element, pathname, {options})  
+useFitter (arg, pathname, {options})  
 return value boolean | undefined.
 
 Returns undefined if an invalid argument is passed.
 
 ## Parameters
 
-- element: string (required): The tag name a target.
+- arg: string (required): The class starting with a dot or tag name a target.
 
 - pathname: string (required): Set a current dynamically pathname.  
   It is function trigger.
