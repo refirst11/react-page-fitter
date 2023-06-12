@@ -2,10 +2,9 @@
 
 [![Release Status](https://img.shields.io/github/release/su-pull/react-page-fitter.svg)](https://github.com/su-pull/react-page-fitter/releases/latest)
 [![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
-[![downloads](https://img.shields.io/npm/dt/react-page-fitter?color=blue)](https://npm-stat.com/charts.html?package=react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a React hook that observe HTML element fits within the current viewport.
+This is a React hook that HTML element fits within the current viewport.
 
 ## Installation
 
@@ -16,40 +15,31 @@ npm install react-page-fitter
 ## Usage
 
 ```tsx
-import useFitter, { Main } from 'react-page-fitter'
+import useFitter from 'react-page-fitter'
 
-function MyComponent({ children }) {
-  const isFit = useFitter()
+function MyComponent() {
   const { pathname } = useLocation()
+  const isFit = useFitter('main', pathname)
 
-  if (isFit === undefined) return <Spinner />
-
-  return (
-    <Main
-      location={pathname}
-      classFitIn={styles.fit_in}
-      classFitOut={styles.fit_out}
-    >
-      {children}
-    </Main>
-  )
+  return !isFit && <ScrollTop />
 }
 ```
 
 ## API
 
-useFitter (ref, pathname, {options})  
-return value boolean | null.
+useFitter (element, pathname, {options})  
+return value boolean | undefined.
+
+Returns undefined if an invalid argument is passed.
 
 ## Parameters
 
-- ref (optional): RefObject to the HTML element to be observe.  
-  if not set ref a value is null.
+- element: string (required): The tag name a target.
 
-- pathname (recommended): Set a current dynamic pathname.  
-  This is the function trigger.
+- pathname: string (required): Set a current dynamically pathname.  
+  It is function trigger.
 
-- options (optional): viewport property values.
+- options: { offsetX?: number, offsetY?: number } (optional): viewport property values.
 
   1\. offsetX: A number representing the horizontal offset to use if the element fits.  
   The default value is 0.
@@ -59,4 +49,4 @@ return value boolean | null.
 
 ## License
 
-The MIT License.
+MIT
