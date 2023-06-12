@@ -1,7 +1,7 @@
 {
   "name": "react-page-fitter",
-  "version": "1.2.2",
-  "description": "hooks to help with css, automatically observe and adjust element size to fit the display",
+  "version": "2.0.0",
+  "description": "hooks with measuring content fit in viewport",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -9,7 +9,6 @@
     "url": "https://github.com/su-pull/react-page-fitter",
     "directory": "react-page-fitter/src"
   },
-  "homepage": "https://works.su-pull.net/react-page-fitter",
   "scripts": {
     "tsc": "./node_modules/.bin/tsc",
     "test": "jest"
@@ -18,9 +17,7 @@
     "react",
     "hooks",
     "viewport",
-    "responsive",
-    "layout",
-    "fitting"
+    "layout"
   ],
   "license": "MIT",
   "dependencies": {
