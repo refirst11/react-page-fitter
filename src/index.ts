@@ -6,7 +6,7 @@ type Option = {
 }
 
 const useFitter = (
-  tagName: string,
+  arg: string,
   pathname: string,
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
@@ -19,12 +19,16 @@ const useFitter = (
     window.document.createElement
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
-  const elm = canUseDOM && document.getElementsByTagName(tagName as string)[0]
+
+  const elm =
+    canUseDOM && arg.startsWith('.')
+      ? document.getElementsByClassName(arg.slice(1) as string)[0]
+      : document.getElementsByTagName(arg as string)[0]
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
     // skip effect, if elm and pathname is undefined
-    if (elm === undefined || pathname === undefined) return setIsFit(undefined)
+    if (!elm || !pathname) return setIsFit(undefined)
     // window and content size calculation
     const winWidth = innerWidth - offsetX
     const winHeight = innerHeight - offsetY
