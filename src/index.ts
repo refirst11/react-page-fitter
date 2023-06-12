@@ -6,7 +6,7 @@ type Option = {
 }
 
 const useFitter = (
-  tagName: string,
+  tagname: string,
   pathname: string,
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
@@ -19,7 +19,7 @@ const useFitter = (
     window.document.createElement
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
-  const elm = canUseDOM && document.getElementsByTagName(tagName as string)[0]
+  const elm = canUseDOM && document.getElementsByTagName(tagname as string)[0]
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
