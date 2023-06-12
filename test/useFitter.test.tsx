@@ -3,14 +3,14 @@ import React from 'react'
 import { renderHook, render, screen } from '@testing-library/react'
 
 describe('useFitter', () => {
-  test('if ref is not set a value is null', () => {
-    const { result } = renderHook(() => useFitter())
-    expect(result.current).toBeNull()
+  test('if arg is not set a value is undefined', () => {
+    const { result } = renderHook(() => useFitter('test', '/'))
+    expect(result.current).toBeUndefined()
   })
 
   const refObject = React.createRef<HTMLDivElement>()
   const TestComponent = () => {
-    return <div ref={refObject}>Test Component</div>
+    return <main>Test Component</main>
   }
 
   test('should return true when the ref object width is Smaller than 1', () => {
@@ -20,7 +20,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 0 })
     Object.defineProperty(element, 'clientHeight', { value: 0 })
     const { result } = renderHook(() =>
-      useFitter(refObject, undefined, { offsetX: -1, offsetY: -1 })
+      useFitter('main', '/', { offsetX: -1, offsetY: -1 })
     )
     expect(result.current).toBe(true)
   })
@@ -32,7 +32,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 1000 })
     Object.defineProperty(element, 'clientHeight', { value: 1000 })
     const { result } = renderHook(() =>
-      useFitter(refObject, undefined, { offsetX: 1001, offsetY: 1001 })
+      useFitter('main', '/', { offsetX: 1001, offsetY: 1001 })
     )
     expect(result.current).toBe(false)
   })
