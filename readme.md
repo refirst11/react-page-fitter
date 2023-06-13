@@ -4,7 +4,7 @@
 [![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a React hook that HTML element fits within the current viewport.
+This is a React hook that observe HTML element fits within the current viewport.
 
 ## Installation
 
@@ -36,10 +36,10 @@ Returns undefined if an invalid argument is passed.
 
 ## Parameters
 
-- arg: string (required): The class starting with a dot or tag name a target.
+- target: string (required): The class starting with a dot or tag name a target HTML element to be observe.
 
 - pathname: string (required): Set a current dynamically pathname.  
-  It is function trigger.
+  This is function trigger.
 
 - options: { offsetX?: number, offsetY?: number } (optional): viewport property values.
 
@@ -51,4 +51,4 @@ Returns undefined if an invalid argument is passed.
 
 ## License
 
-MIT
+MIT License
