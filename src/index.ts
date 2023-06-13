@@ -6,7 +6,7 @@ type Option = {
 }
 
 const useFitter = (
-  arg: string,
+  target: string,
   pathname: string,
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
@@ -21,9 +21,9 @@ const useFitter = (
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
   const elm =
-    canUseDOM && arg.startsWith('.')
-      ? document.getElementsByClassName(arg.slice(1) as string)[0]
-      : document.getElementsByTagName(arg as string)[0]
+    canUseDOM && target.startsWith('.')
+      ? document.getElementsByClassName(target.slice(1) as string)[0]
+      : document.getElementsByTagName(target as string)[0]
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
@@ -37,8 +37,27 @@ const useFitter = (
     setIsFit(tagHeight <= winHeight && tagWidth <= winWidth)
   }, [elm, pathname, offsetX, offsetY])
 
-  // Page pathname updated and trigger the Callback and element is re evaluated.
+  // Page location updated and trigger the Callback and element is re evaluated.
+  // Normally this is the only trigger.
   useClientEffect(updateStatus, [updateStatus])
+
+  // Window resize function.
+  useClientEffect(() => {
+    // entry resize listener
+    window.addEventListener('resize', updateStatus)
+    // clean up the remove listener the component unmount
+    return () => window.removeEventListener('resize', updateStatus)
+  }, [updateStatus])
+
+  // Realtime content resize event watcher function.
+  useClientEffect(() => {
+    // create MutationObserver constructor
+    const observer = new MutationObserver(updateStatus)
+    // start observing the element and child element the watches real time event
+    if (elm) observer.observe(elm, { childList: true, subtree: true })
+    // clean up the observer when the ref component unmount
+    return () => observer.disconnect()
+  }, [updateStatus])
 
   return isFit
 }
