@@ -20,10 +20,9 @@ const useFitter = (
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
-  const elm =
-    canUseDOM && target.startsWith('.')
-      ? document.getElementsByClassName(target.slice(1) as string)[0]
-      : document.getElementsByTagName(target as string)[0]
+  const elm = target.startsWith('.')
+    ? canUseDOM && document.getElementsByClassName(target.slice(1) as string)[0]
+    : canUseDOM && document.getElementsByTagName(target as string)[0]
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
@@ -41,11 +40,17 @@ const useFitter = (
   // Normally this is the only trigger.
   useClientEffect(updateStatus, [updateStatus])
 
-  // Window resize function.
+  // Window reload function.
   useClientEffect(() => {
     // entry resize listener
-    window.addEventListener('resize', updateStatus)
+    window.addEventListener('onload', updateStatus)
     // clean up the remove listener the component unmount
+    return () => window.removeEventListener('onload', updateStatus)
+  }, [updateStatus])
+
+  // Window resize function.
+  useClientEffect(() => {
+    window.addEventListener('resize', updateStatus)
     return () => window.removeEventListener('resize', updateStatus)
   }, [updateStatus])
 
