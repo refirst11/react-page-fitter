@@ -36,7 +36,7 @@ Returns undefined if an invalid argument is passed.
 
 ## Parameters
 
-- target: string (required): The class starting with a dot or tag name a target HTML element to be observe.
+- target: string (required): The attributes, #id or .className or tag name and so forth target HTML element to be observe.
 
 - pathname: string (required): Set a current dynamically pathname.  
   This is function trigger.
