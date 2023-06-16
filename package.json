@@ -1,6 +1,6 @@
 {
   "name": "react-page-fitter",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "hooks to help with css, automatically observe and adjust element size to fit the display",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
