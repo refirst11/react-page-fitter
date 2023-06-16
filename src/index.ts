@@ -37,14 +37,6 @@ const useFitter = (
   // Normally this is the only trigger.
   useClientEffect(updateStatus, [updateStatus])
 
-  // Window reload function.
-  useClientEffect(() => {
-    // entry resize listener
-    window.addEventListener('onload', updateStatus)
-    // clean up the remove listener the component unmount
-    return () => window.removeEventListener('onload', updateStatus)
-  }, [updateStatus])
-
   // Window resize function.
   useClientEffect(() => {
     window.addEventListener('resize', updateStatus)
