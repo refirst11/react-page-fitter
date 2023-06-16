@@ -19,10 +19,7 @@ const useFitter = (
     window.document.createElement
   )
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
-
-  const elm = target.startsWith('.')
-    ? canUseDOM && document.getElementsByClassName(target.slice(1) as string)[0]
-    : canUseDOM && document.getElementsByTagName(target as string)[0]
+  const elm = canUseDOM && document.querySelector(target)
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
@@ -31,8 +28,8 @@ const useFitter = (
     // window and content size calculation
     const winWidth = innerWidth - offsetX
     const winHeight = innerHeight - offsetY
-    const tagHeight = (elm && elm.clientHeight) as number
-    const tagWidth = (elm && elm.clientWidth) as number
+    const tagHeight = elm.clientHeight
+    const tagWidth = elm.clientWidth
     setIsFit(tagHeight <= winHeight && tagWidth <= winWidth)
   }, [elm, pathname, offsetX, offsetY])
 
