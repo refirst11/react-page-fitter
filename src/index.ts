@@ -11,6 +11,7 @@ const useFitter = (
   { offsetX = 0, offsetY = 0 }: Option = {}
 ) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
+  const [element, setElement] = useState<Element>()
 
   // Client safe.
   const canUseDOM = !!(
@@ -18,20 +19,30 @@ const useFitter = (
     window.document &&
     window.document.createElement
   )
+
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
-  const elm = canUseDOM && document.querySelector(target)
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
     // skip effect, if elm and pathname is undefined
-    if (!elm || !pathname) return setIsFit(undefined)
-    // window and content size calculation
+    if (!element) return setIsFit(undefined)
+    // define a variable with an offset to the window size
     const winWidth = innerWidth - offsetX
     const winHeight = innerHeight - offsetY
-    const tagHeight = elm.clientHeight
-    const tagWidth = elm.clientWidth
-    setIsFit(tagHeight <= winHeight && tagWidth <= winWidth)
-  }, [elm, pathname, offsetX, offsetY])
+    // calculate relative value from element to viewport
+    const rect = element.getBoundingClientRect()
+    setIsFit(
+      rect.top >= 0 &&
+        rect.bottom <= winHeight &&
+        rect.left >= 0 &&
+        rect.right <= winWidth
+    )
+  }, [element, offsetX, offsetY])
+
+  // Get Server Side page element, Trigger of pathname will trigger updateStatus.
+  useClientEffect(() => {
+    return setElement(document.querySelector(target) as Element)
+  }, [target, pathname])
 
   // Page location updated and trigger the Callback and element is re evaluated.
   // Normally this is the only trigger.
@@ -48,7 +59,7 @@ const useFitter = (
     // create MutationObserver constructor
     const observer = new MutationObserver(updateStatus)
     // start observing the element and child element the watches real time event
-    if (elm) observer.observe(elm, { childList: true, subtree: true })
+    if (element) observer.observe(element, { childList: true, subtree: true })
     // clean up the observer when the ref component unmount
     return () => observer.disconnect()
   }, [updateStatus])
