@@ -54,6 +54,12 @@ const useFitter = (
     return () => window.removeEventListener('resize', updateStatus)
   }, [updateStatus])
 
+  // Scroll event function.
+  useClientEffect(() => {
+    window.addEventListener('scroll', updateStatus)
+    return () => window.removeEventListener('scroll', updateStatus)
+  }, [updateStatus])
+
   // Realtime content resize event watcher function.
   useClientEffect(() => {
     // create MutationObserver constructor
