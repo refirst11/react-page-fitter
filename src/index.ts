@@ -24,7 +24,7 @@ const useFitter = (
 
   // This the core callback function.
   const updateStatus = useCallback(() => {
-    // skip effect, if elm and pathname is undefined
+    // skip effect, if element is undefined
     if (!element) return setIsFit(undefined)
     // define a variable with an offset to the window size
     const winWidth = innerWidth - offsetX
@@ -59,7 +59,12 @@ const useFitter = (
     // create MutationObserver constructor
     const observer = new MutationObserver(updateStatus)
     // start observing the element and child element the watches real time event
-    if (element) observer.observe(element, { childList: true, subtree: true })
+    if (element)
+      observer.observe(element, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      })
     // clean up the observer when the ref component unmount
     return () => observer.disconnect()
   }, [updateStatus])
