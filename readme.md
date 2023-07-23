@@ -4,7 +4,7 @@
 [![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a React hook that observe HTML element fits within the current viewport.
+This is a React hook that observe HTML element fits within the current viewport or element.
 
 ## Installation
 
@@ -18,36 +18,34 @@ npm install react-page-fitter
 import useFitter from 'react-page-fitter'
 
 function MyComponent() {
-  const { pathname } = useLocation()
-  const isFit = useFitter('.container', pathname)
+  const pathname = // useLocation...
+  const isFit = useFitter('.class', pathname)
 
-  if (isFit) return null
-
-  return <ScrollTop />
+  return isFit && <CustomComponents/>
 }
 ```
 
 ## API
 
-useFitter (arg, pathname, {options})  
+useFitter (arguments, {options})  
 return value boolean | undefined.
 
 Returns undefined if an invalid argument is passed.
 
-## Parameters
+## Arguments
 
-- target: string (required): The attributes, #id or .className or tag name and so forth target HTML element to be observe.
+| Parameter         | Meaning                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| target (required) | The judgement target element by tag, className or id        |
+| pathname          | The dynamic pathname to render when placing at layout level |
 
-- pathname: string (required): Set a current dynamically pathname.  
-  This is function trigger.
+## Options(object)
 
-- options: { offsetX?: number, offsetY?: number } (optional): viewport property values.
-
-  1\. offsetX: A number representing the horizontal offset to use if the element fits.  
-  The default value is 0.
-
-  2\. offsetY: A number representing the vertical offset to use if the element fits.  
-  The default value is 0.
+| Field     | Key                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------- |
+| offsetX   | Horizontal viewport offsetX number when not using parentBox, The default value is 0                           |
+| offsetY   | Vertical viewport offsetY number when not using parentBox, The default value is 0                             |
+| parentBox | The judgement parentBox element by tag, className or id is judged in place of the viewport, default undefined |
 
 ## License
 
