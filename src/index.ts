@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 type Option = {
-  parentBox?: string
   offsetX?: number
   offsetY?: number
+  parentBox?: string
+  pathname?: string
 }
 
 const useFitter = (
   target: string,
-  pathname: string,
-  { offsetX = 0, offsetY = 0, parentBox }: Option = {}
+  { offsetX = 0, offsetY = 0, parentBox, pathname }: Option = {}
 ) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
   const [element, setElement] = useState<Element>()
