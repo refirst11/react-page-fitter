@@ -1,6 +1,7 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 type Option = {
+  parentBox?: string
   offsetX?: number
   offsetY?: number
 }
@@ -8,10 +9,11 @@ type Option = {
 const useFitter = (
   target: string,
   pathname: string,
-  { offsetX = 0, offsetY = 0 }: Option = {}
+  { offsetX = 0, offsetY = 0, parentBox }: Option = {}
 ) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
   const [element, setElement] = useState<Element>()
+  const [parent, setParent] = useState<Element>()
 
   // Client safe.
   const canUseDOM = !!(
@@ -20,6 +22,7 @@ const useFitter = (
     window.document.createElement
   )
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
 
   // This the core callback function.
@@ -31,18 +34,32 @@ const useFitter = (
     const winHeight = innerHeight - offsetY
     // calculate relative value from element to viewport
     const rect = element.getBoundingClientRect()
-    setIsFit(
+    const elementRect = element.getBoundingClientRect()
+    const parentRect = parent?.getBoundingClientRect()
+
+    const viewportJudge =
       rect.top >= 0 &&
-        rect.bottom <= winHeight &&
-        rect.left >= 0 &&
-        rect.right <= winWidth
-    )
-  }, [element, offsetX, offsetY])
+      rect.bottom <= winHeight &&
+      rect.left >= 0 &&
+      rect.right <= winWidth
+
+    const parentBoxJudge =
+      parentRect &&
+      elementRect.top >= parentRect.top &&
+      elementRect.bottom <= parentRect.bottom &&
+      elementRect.left >= parentRect.left &&
+      elementRect.right <= parentRect.right
+
+    if (!parentBox) setIsFit(viewportJudge)
+    if (parentBox) setIsFit(parentBoxJudge)
+  }, [element, offsetX, offsetY, parent, parentBox])
 
   // Get Server Side page element, Trigger of pathname will trigger updateStatus.
-  useClientEffect(() => {
-    return setElement(document.querySelector(target) as Element)
-  }, [target, pathname])
+  useEffect(() => {
+    setElement(document.querySelector(target) as Element)
+    if (parentBox) setParent(document.querySelector(parentBox) as Element)
+    return
+  }, [target, parentBox, pathname])
 
   // Page location updated and trigger the Callback and element is re evaluated.
   // Normally this is the only trigger.
