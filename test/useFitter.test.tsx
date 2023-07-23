@@ -4,7 +4,7 @@ import { renderHook, render, screen } from '@testing-library/react'
 
 describe('useFitter', () => {
   test('if arg is not match the pattern return undefined.', () => {
-    const { result } = renderHook(() => useFitter('test', '/'))
+    const { result } = renderHook(() => useFitter('test'))
     expect(result.current).toBeUndefined()
   })
 
@@ -25,7 +25,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 0 })
     Object.defineProperty(element, 'clientHeight', { value: 0 })
     const { result } = renderHook(() =>
-      useFitter('#content', '/', { offsetX: -1, offsetY: -1 })
+      useFitter('#content', { offsetX: -1, offsetY: -1 })
     )
     expect(result.current).toBe(true)
   })
@@ -37,7 +37,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 0 })
     Object.defineProperty(element, 'clientHeight', { value: 0 })
     const { result } = renderHook(() =>
-      useFitter('.container', '/', { offsetX: -1, offsetY: -1 })
+      useFitter('.container', { offsetX: -1, offsetY: -1 })
     )
     expect(result.current).toBe(true)
   })
@@ -49,7 +49,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 0 })
     Object.defineProperty(element, 'clientHeight', { value: 0 })
     const { result } = renderHook(() =>
-      useFitter('main', '/', { offsetX: -1, offsetY: -1 })
+      useFitter('main', { offsetX: -1, offsetY: -1 })
     )
     expect(result.current).toBe(true)
   })
@@ -61,7 +61,7 @@ describe('useFitter', () => {
     Object.defineProperty(element, 'clientWidth', { value: 1000 })
     Object.defineProperty(element, 'clientHeight', { value: 1000 })
     const { result } = renderHook(() =>
-      useFitter('main', '/', { offsetX: 1001, offsetY: 1001 })
+      useFitter('main', { offsetX: 1001, offsetY: 1001 })
     )
     expect(result.current).toBe(false)
   })
@@ -72,9 +72,7 @@ describe('useFitter', () => {
 
     Object.defineProperty(element, 'clientWidth', { value: 100 })
     Object.defineProperty(element, 'clientHeight', { value: 100 })
-    const { result } = renderHook(() =>
-      useFitter('main', '/', { parentBox: 'div' })
-    )
+    const { result } = renderHook(() => useFitter('main', { parentBox: 'div' }))
     expect(result.current).toBe(true)
   })
 })
