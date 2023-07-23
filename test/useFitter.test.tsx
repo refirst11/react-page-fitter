@@ -3,20 +3,22 @@ import React from 'react'
 import { renderHook, render, screen } from '@testing-library/react'
 
 describe('useFitter', () => {
-  test('if arg is not match the pattern return undefined', () => {
+  test('if arg is not match the pattern return undefined.', () => {
     const { result } = renderHook(() => useFitter('test', '/'))
     expect(result.current).toBeUndefined()
   })
 
   const TestComponent = () => {
     return (
-      <main id="content" className="container">
-        Test
-      </main>
+      <div style={{ width: 200, height: 200 }}>
+        <main id="content" className="container">
+          Test
+        </main>
+      </div>
     )
   }
 
-  test('This id test should return true when the element width is Smaller than 1', () => {
+  test('This id test should return true when the element width is Smaller than 1.', () => {
     render(<TestComponent />)
     const element = screen.getByText('Test')
 
@@ -28,7 +30,7 @@ describe('useFitter', () => {
     expect(result.current).toBe(true)
   })
 
-  test('This className test should return true when the element width is Smaller than 1', () => {
+  test('This className test should return true when the element width is Smaller than 1.', () => {
     render(<TestComponent />)
     const element = screen.getByText('Test')
 
@@ -40,7 +42,7 @@ describe('useFitter', () => {
     expect(result.current).toBe(true)
   })
 
-  test('This tagname test should return true when the element width is Smaller than 1', () => {
+  test('This tagname test should return true when the element width is Smaller than 1.', () => {
     render(<TestComponent />)
     const element = screen.getByText('Test')
 
@@ -52,7 +54,7 @@ describe('useFitter', () => {
     expect(result.current).toBe(true)
   })
 
-  test('This tagname test should return false when the element width is Larger than 999', () => {
+  test('This tagname test should return false when the element width is Larger than 999.', () => {
     render(<TestComponent />)
     const element = screen.getByText('Test')
 
@@ -62,5 +64,17 @@ describe('useFitter', () => {
       useFitter('main', '/', { offsetX: 1001, offsetY: 1001 })
     )
     expect(result.current).toBe(false)
+  })
+
+  test('This parentBox test should return true when the target element is Smaller than parentBox.', () => {
+    render(<TestComponent />)
+    const element = screen.getByText('Test')
+
+    Object.defineProperty(element, 'clientWidth', { value: 100 })
+    Object.defineProperty(element, 'clientHeight', { value: 100 })
+    const { result } = renderHook(() =>
+      useFitter('main', '/', { parentBox: 'div' })
+    )
+    expect(result.current).toBe(true)
   })
 })
