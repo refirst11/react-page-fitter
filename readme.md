@@ -19,7 +19,7 @@ import useFitter from 'react-page-fitter'
 
 function MyComponent() {
   const pathname = // useLocation...
-  const isFit = useFitter('.class', pathname)
+  const isFit = useFitter('.class')
 
   return isFit && <CustomComponents/>
 }
