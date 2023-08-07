@@ -1,7 +1,7 @@
 {
   "name": "react-page-fitter",
-  "version": "2.1.2",
-  "description": "hooks to help with css, automatically observe and adjust element size to fit the display",
+  "version": "2.1.3",
+  "description": "React Hooks library for elements whether it fits within the judgement.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -17,11 +17,8 @@
     "react",
     "hooks",
     "viewport",
-    "parent",
-    "fitting",
-    "judgement",
-    "responsive",
-    "layout"
+    "element",
+    "judgement"
   ],
   "license": "MIT",
   "dependencies": {
