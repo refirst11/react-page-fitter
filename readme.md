@@ -4,7 +4,8 @@
 [![Minzip Size](https://img.shields.io/bundlephobia/minzip/react-page-fitter)](https://bundlephobia.com/package/react-page-fitter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a React hook that observe HTML element fits within the current viewport or element.
+This is a React hooks that observe HTML element fits within the current viewport or element.  
+It's the for building more complex UI.
 
 ## Installation
 
@@ -27,7 +28,7 @@ function MyComponent() {
 
 ## API
 
-useFitter (argument, {options})  
+useFitter (argument, options)  
 return value boolean | undefined.
 
 Returns undefined if an invalid argument is passed.
@@ -49,4 +50,4 @@ Returns undefined if an invalid argument is passed.
 
 ## License
 
-MIT License
+The MIT License.
