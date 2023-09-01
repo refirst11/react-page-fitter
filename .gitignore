@@ -4,4 +4,5 @@ dist
 .DS_Store
 .vscode
 .prettierrc
+.prettierignore
 package-lock.json
