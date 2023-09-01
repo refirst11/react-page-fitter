@@ -15,16 +15,6 @@ const useFitter = (
   const [element, setElement] = useState<Element>()
   const [parent, setParent] = useState<Element>()
 
-  // Client safe.
-  const canUseDOM = !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  )
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const useClientEffect = canUseDOM ? useLayoutEffect : () => {}
-
   // This the core callback function.
   const updateStatus = useCallback(() => {
     // skip effect, if element is undefined
@@ -63,22 +53,22 @@ const useFitter = (
 
   // Page location updated and trigger the Callback and element is re evaluated.
   // Normally this is the only trigger.
-  useClientEffect(updateStatus, [updateStatus])
+  useLayoutEffect(updateStatus, [updateStatus])
 
   // Window resize function.
-  useClientEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('resize', updateStatus)
     return () => window.removeEventListener('resize', updateStatus)
   }, [updateStatus])
 
   // Scroll event function.
-  useClientEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('scroll', updateStatus)
     return () => window.removeEventListener('scroll', updateStatus)
   }, [updateStatus])
 
   // Realtime content resize event watcher function.
-  useClientEffect(() => {
+  useLayoutEffect(() => {
     // create MutationObserver constructor
     const observer = new MutationObserver(updateStatus)
     // start observing the element and child element the watches real time event
