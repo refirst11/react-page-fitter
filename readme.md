@@ -19,10 +19,13 @@ npm install react-page-fitter
 import useFitter from 'react-page-fitter'
 
 function MyComponent() {
-  const pathname = // useLocation...
-  const isFit = useFitter('.class')
+  const isFit = useFitter('.style')
 
-  return isFit && <CustomComponents/>
+  return (
+    <div>
+      {isFit && <CustomComponents />}
+    </div>
+  )
 }
 ```
 
