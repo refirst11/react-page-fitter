@@ -4,12 +4,11 @@ type Option = {
   offsetX?: number
   offsetY?: number
   parentBox?: string
-  pathname?: string
 }
 
 const useFitter = (
   target: string,
-  { offsetX = 0, offsetY = 0, parentBox, pathname }: Option = {}
+  { offsetX = 0, offsetY = 0, parentBox }: Option = {}
 ) => {
   const [isFit, setIsFit] = useState<boolean | undefined>(undefined)
   const [element, setElement] = useState<Element>()
@@ -44,12 +43,12 @@ const useFitter = (
     if (parentBox) setIsFit(parentBoxJudge)
   }, [element, offsetX, offsetY, parent, parentBox])
 
-  // Get Server Side page element, Trigger of pathname will trigger updateStatus.
+  // Get Server Side page element with mount.
   useEffect(() => {
     setElement(document.querySelector(target) as Element)
     if (parentBox) setParent(document.querySelector(parentBox) as Element)
     return
-  }, [target, parentBox, pathname])
+  }, [target, parentBox])
 
   // Page location updated and trigger the Callback and element is re evaluated.
   // Normally this is the only trigger.
@@ -80,7 +79,7 @@ const useFitter = (
       })
     // clean up the observer when the ref component unmount
     return () => observer.disconnect()
-  }, [updateStatus])
+  }, [element, updateStatus])
 
   return isFit
 }
