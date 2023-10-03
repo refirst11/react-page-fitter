@@ -49,7 +49,6 @@ Returns undefined if an invalid argument is passed.
 | offsetX   | Horizontal viewport offsetX number when not using parentBox, The default value is 0                           |
 | offsetY   | Vertical viewport offsetY number when not using parentBox, The default value is 0                             |
 | parentBox | The judgement parentBox element by tag, className or id is judged in place of the viewport, default undefined |
-| pathname  | The dynamic pathname to render when placing at layout level                                                   |
 
 ## License
 
