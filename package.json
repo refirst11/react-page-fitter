@@ -1,6 +1,6 @@
 {
   "name": "react-page-fitter",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "React Hooks library for elements whether it fits within the judgement.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,7 +10,6 @@
     "directory": "react-page-fitter/src"
   },
   "scripts": {
-    "compile": "./node_modules/.bin/tsc",
     "test": "jest"
   },
   "keywords": [
