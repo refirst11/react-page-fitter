@@ -2,16 +2,6 @@
   "name": "react-page-fitter",
   "version": "2.1.7",
   "description": "React Hooks library for elements whether it fits within the judgement.",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/su-pull/react-page-fitter",
-    "directory": "react-page-fitter/src"
-  },
-  "scripts": {
-    "test": "jest"
-  },
   "keywords": [
     "react",
     "hooks",
@@ -19,7 +9,20 @@
     "element",
     "judgement"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/su-pull/react-page-fitter",
+    "directory": "react-page-fitter/src"
+  },
   "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.1",
